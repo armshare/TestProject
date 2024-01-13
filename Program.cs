@@ -1,4 +1,27 @@
-﻿double total = 0;
+﻿
+//------
+
+double usd = 23.73;
+int vnd = UsdToVnd(usd);
+
+Console.WriteLine($"${usd} USD = ${vnd} VND");
+Console.WriteLine($"${vnd} VND = ${VndToUsd(vnd)} USD");
+
+int UsdToVnd(double usd)
+{
+    int rate = 23500;
+    return (int)(rate * usd);
+}
+
+double VndToUsd(int vnd)
+{
+    double rate = 23500;
+    return vnd / rate;
+}
+
+
+//---------
+double total = 0;
 double minimumSpend = 30.00;
 
 double[] items = { 15.97, 3.50, 12.25, 22.99, 10.98 };
@@ -25,4 +48,147 @@ bool TotalMeetsMinimum()
 string FormatDecimal(double input)
 {
     return input.ToString().Substring(0, 5);
+}
+
+
+// Exercise - Return strings from methods
+string ReverseWord(string word)
+{
+    string result = "";
+    for (int i = word.Length - 1; i >= 0; i--)
+    {
+        result += word[i]
+;
+    }
+
+    return result;
+}
+
+string input = "snake";
+Console.WriteLine(input);
+Console.WriteLine(ReverseWord(input));
+
+string ReverseSentense(string input)
+{
+    string result = "";
+    string[] words = input.Split(" ");
+
+    foreach (string word in words)
+    {
+        result += ReverseWord(word) + " ";
+    }
+    return result.Trim();
+}
+
+string input1 = "there arn snakes at the zoo";
+Console.WriteLine(input1);
+Console.WriteLine(ReverseSentense(input1));
+
+// Exercise - Return Booleans from methods
+string[] words = { "racecar", "talented", "deified", "tent", "tenet" };
+Console.WriteLine("Is is a palindrome?");
+foreach (string word in words)
+{
+    Console.WriteLine($"{word}: {IsPalindrome(word)}");
+}
+
+bool IsPalindrome(string word)
+{
+    int start = 0;
+    int end = word.Length - 1;
+    while (start < end)
+    {
+        if (word[start] != word[end])
+        {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}
+
+//Exercise - Return arrays from methods eg: Find coins to make change
+int[,] TwoCoins(int[] coins, int target)
+{
+    int[,] result = { { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 } };
+    int count = 0;
+    for (int curr = 0; curr < coins.Length; curr++)
+    {
+        for (int next = curr + 1; next < coins.Length; next++)
+        {
+            if (coins[curr] + coins[next] == target)
+            {
+                result[count, 0] = curr;
+                result[count, 1] = next;
+                count++;
+            }
+
+            if (count == result.GetLength(0))
+            {
+                return result;
+            }
+        }
+    }
+    return (count == 0) ? new int[0, 0] : result;
+}
+int target = 80;
+int[] coins = new int[] { 5, 5, 50, 25, 25, 10, 5 };
+int[,] result = TwoCoins(coins, target);
+if (result.Length == 0)
+{
+    Console.WriteLine("No two coins make change");
+}
+else
+{
+    Console.WriteLine($"Change found as  position:");
+    for (int i = 0; i < result.GetLength(0); i++)
+    {
+        if (result[i, 0] == -1)
+        {
+            break;
+        }
+        Console.WriteLine($"{result[i, 0]} , {result[i, 1]}");
+    }
+}
+//Exercise - Complete the challenge to add methods to make the game playable
+Random random = new Random();
+
+Console.WriteLine("Would you like to play? (Y/N)");
+if (ShouldPlay())
+{
+    PlayGame();
+}
+
+bool ShouldPlay()
+{
+    string input = Console.ReadLine();
+    return (input.ToUpper() == "Y") ? true : false;
+    // return response.ToLower().Equals("y");
+}
+
+void PlayGame()
+{
+    var play = true;
+
+    while (play)
+    {
+        var targetGame = random.Next(1, 5);
+        var roll = random.Next(1, 5);
+
+        Console.WriteLine($"Roll a number greater than {targetGame} to win!");
+        Console.WriteLine($"You rolled a {roll}");
+        Console.WriteLine(WinOrLose(roll, targetGame));
+        Console.WriteLine("\nPlay again? (Y/N)");
+
+        play = ShouldPlay();
+
+    }
+}
+
+bool WinOrLose(int roll, int target)
+{
+    var result = (roll > target) ? true : false;
+    if (result) { Console.WriteLine("You win!"); } else { Console.WriteLine($"You lose!"); }
+    return result;
 }
