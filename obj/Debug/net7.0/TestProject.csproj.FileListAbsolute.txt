@@ -1,0 +1,15 @@
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/bin/Debug/net7.0/TestProject
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/bin/Debug/net7.0/TestProject.deps.json
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/bin/Debug/net7.0/TestProject.runtimeconfig.json
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/bin/Debug/net7.0/TestProject.dll
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/bin/Debug/net7.0/TestProject.pdb
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.csproj.AssemblyReference.cache
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.AssemblyInfoInputs.cache
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.AssemblyInfo.cs
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.csproj.CoreCompileInputs.cache
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.dll
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/refint/TestProject.dll
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.pdb
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/TestProject.genruntimeconfig.cache
+/Users/iarm/Documents/dev/dotnet/TestProject/TestProject/obj/Debug/net7.0/ref/TestProject.dll
