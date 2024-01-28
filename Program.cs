@@ -1,194 +1,78 @@
-﻿
-//------
 
-double usd = 23.73;
-int vnd = UsdToVnd(usd);
 
-Console.WriteLine($"${usd} USD = ${vnd} VND");
-Console.WriteLine($"${vnd} VND = ${VndToUsd(vnd)} USD");
-
-int UsdToVnd(double usd)
+string[] pettingZoo =
 {
-    int rate = 23500;
-    return (int)(rate * usd);
-}
+    "alpacas",
+    "capybaras",
+    "chickens",
+    "ducks",
+    "emus",
+    "geese",
+    "goats",
+    "iguanas",
+    "kangaroos",
+    "lemurs",
+    "llamas",
+    "macaws",
+    "ostriches",
+    "pigs",
+    "ponies",
+    "rabbits",
+    "sheep",
+    "tortoises"
+};
 
-double VndToUsd(int vnd)
+PlanSchoolVisit("School A");
+PlanSchoolVisit("School B", 3);
+PlanSchoolVisit("School C", 2);
+
+// RandomizeAnimals();
+void RandomizeAnimals()
 {
-    double rate = 23500;
-    return vnd / rate;
-}
-
-
-//---------
-double total = 0;
-double minimumSpend = 30.00;
-
-double[] items = { 15.97, 3.50, 12.25, 22.99, 10.98 };
-double[] discounts = { 0.30, 0.00, 0.10, 0.20, 0.50 };
-
-for (int i = 0; i < items.Length; i++)
-{
-    total += GetDiscountedPrice(i);
-}
-total -= TotalMeetsMinimum() ? 5.00 : 0.00;
-
-Console.WriteLine($"Total: ${FormatDecimal(total)}");
-
-double GetDiscountedPrice(int itemIndex)
-{
-    return items[itemIndex] * (1 - discounts[itemIndex]);
-}
-
-bool TotalMeetsMinimum()
-{
-    return total >= minimumSpend;
-}
-
-string FormatDecimal(double input)
-{
-    return input.ToString().Substring(0, 5);
-}
-
-
-// Exercise - Return strings from methods
-string ReverseWord(string word)
-{
-    string result = "";
-    for (int i = word.Length - 1; i >= 0; i--)
+    Random random = new Random();
+    for (var i = 0; i < pettingZoo.Length; i++)
     {
-        result += word[i]
-;
+        int r = random.Next(i, pettingZoo.Length);
+        string temp = pettingZoo[r];
+        pettingZoo[r] = pettingZoo[i];
+        pettingZoo[i] = temp;
     }
-
-    return result;
 }
 
-string input = "snake";
-Console.WriteLine(input);
-Console.WriteLine(ReverseWord(input));
-
-string ReverseSentense(string input)
+// string[,] group = AssignGroup();
+string[,] AssignGroup(int groups = 6)
 {
-    string result = "";
-    string[] words = input.Split(" ");
-
-    foreach (string word in words)
-    {
-        result += ReverseWord(word) + " ";
-    }
-    return result.Trim();
-}
-
-string input1 = "there arn snakes at the zoo";
-Console.WriteLine(input1);
-Console.WriteLine(ReverseSentense(input1));
-
-// Exercise - Return Booleans from methods
-string[] words = { "racecar", "talented", "deified", "tent", "tenet" };
-Console.WriteLine("Is is a palindrome?");
-foreach (string word in words)
-{
-    Console.WriteLine($"{word}: {IsPalindrome(word)}");
-}
-
-bool IsPalindrome(string word)
-{
+    string[,] result = new string[groups, pettingZoo.Length / groups];
     int start = 0;
-    int end = word.Length - 1;
-    while (start < end)
+    for (int i = 0; i < groups; i++)
     {
-        if (word[start] != word[end])
+        for (int j = 0; j < result.GetLength(1); j++)
         {
-            return false;
-        }
-        start++;
-        end--;
-    }
-    return true;
-}
-
-//Exercise - Return arrays from methods eg: Find coins to make change
-int[,] TwoCoins(int[] coins, int target)
-{
-    int[,] result = { { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 } };
-    int count = 0;
-    for (int curr = 0; curr < coins.Length; curr++)
-    {
-        for (int next = curr + 1; next < coins.Length; next++)
-        {
-            if (coins[curr] + coins[next] == target)
-            {
-                result[count, 0] = curr;
-                result[count, 1] = next;
-                count++;
-            }
-
-            if (count == result.GetLength(0))
-            {
-                return result;
-            }
+            result[i, j] = pettingZoo[start++];
         }
     }
-    return (count == 0) ? new int[0, 0] : result;
-}
-int target = 80;
-int[] coins = new int[] { 5, 5, 50, 25, 25, 10, 5 };
-int[,] result = TwoCoins(coins, target);
-if (result.Length == 0)
-{
-    Console.WriteLine("No two coins make change");
-}
-else
-{
-    Console.WriteLine($"Change found as  position:");
-    for (int i = 0; i < result.GetLength(0); i++)
-    {
-        if (result[i, 0] == -1)
-        {
-            break;
-        }
-        Console.WriteLine($"{result[i, 0]} , {result[i, 1]}");
-    }
-}
-//Exercise - Complete the challenge to add methods to make the game playable
-Random random = new Random();
 
-Console.WriteLine("Would you like to play? (Y/N)");
-if (ShouldPlay())
-{
-    PlayGame();
-}
-
-bool ShouldPlay()
-{
-    string input = Console.ReadLine();
-    return (input.ToUpper() == "Y") ? true : false;
-    // return response.ToLower().Equals("y");
-}
-
-void PlayGame()
-{
-    var play = true;
-
-    while (play)
-    {
-        var targetGame = random.Next(1, 5);
-        var roll = random.Next(1, 5);
-
-        Console.WriteLine($"Roll a number greater than {targetGame} to win!");
-        Console.WriteLine($"You rolled a {roll}");
-        Console.WriteLine(WinOrLose(roll, targetGame));
-        Console.WriteLine("\nPlay again? (Y/N)");
-
-        play = ShouldPlay();
-
-    }
-}
-
-bool WinOrLose(int roll, int target)
-{
-    var result = (roll > target) ? true : false;
-    if (result) { Console.WriteLine("You win!"); } else { Console.WriteLine($"You lose!"); }
     return result;
+}
+
+// PrintGroup(group);
+void PrintGroup(string[,] group)
+{
+    for (int i = 0; i < group.GetLength(0); i++)
+    {
+        Console.Write($"Group {i + 1}: ");
+        for (int j = 0; j < group.GetLength(1); j++)
+        {
+            Console.Write($"{group[i, j]}  ");
+        }
+        Console.WriteLine();
+    }
+}
+
+void PlanSchoolVisit(string schoolName, int groups = 6)
+{
+    RandomizeAnimals();
+    string[,] group1 = AssignGroup(groups);
+    Console.WriteLine(schoolName);
+    PrintGroup(group1);
 }
